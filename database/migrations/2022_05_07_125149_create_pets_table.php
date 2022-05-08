@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('urlPhoto');
             $table->unsignedInteger('category_id');
             $table->enum('status', array('available', 'pending','sold'));
             $table->timestamps();

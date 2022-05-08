@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $pets = App\Models\Pet::all();
-    return view('welcome',compact('pets'));
-});
+Route::get('/', 'App\Http\Controllers\PetsController@home')->name('/');
+Route::get('pet/create', 'App\Http\Controllers\PetsController@create')->name('/pet/create');
+Route::post('pet/store', 'App\Http\Controllers\PetsController@store')->name('/pet/store');
 
-Route::get('pets', function () {
+/*Route::get('pets', function () {
     return App\Models\Pet::all();
 });
-
-//Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
