@@ -18,6 +18,9 @@
                 @endforeach
             </div>
         </div>
+        <div class="card-footer">
+            <a href="pet/{{ $pet->id }}" class="btn btn-secondary text-uppercase">View pet</a>
+        </div>
     </div>
 </div>
 @endforeach

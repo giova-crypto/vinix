@@ -17,6 +17,13 @@ class PetsController extends Controller
         return view('welcome',compact('pets'));
     }
 
+    public function show($id)
+    {
+        $pet = Pet::find($id);
+
+        return view('pets.show',compact('pet'));
+    }
+
     public function create()
     {
         $categories = Category::all();

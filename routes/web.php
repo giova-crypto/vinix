@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\PetsController@home')->name('/');
 Route::get('pet/create', 'App\Http\Controllers\PetsController@create')->name('/pet/create');
 Route::post('pet/store', 'App\Http\Controllers\PetsController@store')->name('/pet/store');
+Route::get('pet/{id}','App\Http\Controllers\PetsController@show');
 
 /*Route::get('pets', function () {
     return App\Models\Pet::all();
