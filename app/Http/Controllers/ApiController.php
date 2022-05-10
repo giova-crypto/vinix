@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Pet;
 use App\Models\Tag;
 use App\Models\Category;
 
-
-
-class PetsController extends Controller
+class ApiController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      * Laravel 9 REST API CRUD
@@ -22,7 +20,19 @@ class PetsController extends Controller
     {
         $pets = Pet::all();
 
-        return view('pets.index',compact('pets'));
+        if($pets->isEmpty()){
+            return response()->json([
+                'status'=>Response::HTTP_NOT_FOUND ,
+                'type'=>Response::$statusTexts[Response::HTTP_NOT_FOUND ],
+                'description'=>'Pets Not Found.'
+            ]);
+        }else{
+            return response()->json([
+                'status'=>Response::HTTP_OK,
+                'type'=>Response::$statusTexts[Response::HTTP_OK],
+                'pets' => $pets
+            ]);
+        }
     }
 
     /**
@@ -30,13 +40,6 @@ class PetsController extends Controller
      * Laravel 9 REST API CRUD
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $categories = Category::all();
-        $tags = Tag::all();
-
-        return view('pets.create',compact('categories','tags'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -65,11 +68,17 @@ class PetsController extends Controller
         $pet->tags()->attach($request->tags);
 
         if(!$saved){
-            notify()->error('Pet couldn\'t be created.');
-            return back();
+            return response()->json([
+                'status'=>Response::HTTP_NOT_FOUND ,
+                'type'=>Response::$statusTexts[Response::HTTP_NOT_FOUND ],
+                'description'=> 'Pet Not Found.'
+            ]);
         }else{
-            notify()->success('Pet created successfully.');
-            return back();
+            return response()->json([
+                'status'=>Response::HTTP_OK ,
+                'type'=>Response::$statusTexts[Response::HTTP_OK ],
+                'pet'=>$pet
+            ]);
         }
     }
 
@@ -84,26 +93,27 @@ class PetsController extends Controller
         $pet = Pet::find($id);
 
         if($pet==null){
-            notify()->error('Pet doesn\'t exists.');
-            return redirect('pets');
+            return response()->json([
+                'status'=>Response::HTTP_NOT_FOUND ,
+                'type'=>Response::$statusTexts[Response::HTTP_NOT_FOUND ],
+                'description'=> 'Pet Not Found.'
+            ]);
         }else{
-            return view('pets.show',compact('pet'));
+            return response()->json([
+                'status'=>Response::HTTP_OK ,
+                'type'=>Response::$statusTexts[Response::HTTP_OK ],
+                'pet'=>$pet
+            ]);
         }
         
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request,[
             'name'=>'required',
-            'photoUrl'=>'required'
+            'photoUrl'=>'required',
+            'category'=>'required',
+            'status'=>'required'
         ]);
         
         $pet = Pet::find($id);

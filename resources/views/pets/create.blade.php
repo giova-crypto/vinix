@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container center bg-white" style="padding-bottom: 10px; width: 40vw; margin-top: 5vh; margin-bottom: 5vh; border: 8px solid white; border-radius: 10px;">
-    <form method="POST" action="{{ route('/pet/store') }}" class=" g-1 bg-white">
+    <form method="POST" action="{{ route('pets.store') }}" class=" g-1 bg-white">
         {{ csrf_field() }}
         <h1>Create Pet</h1>
         <div class="mb-3 {{ $errors->has('name')?'has-error':'' }}">

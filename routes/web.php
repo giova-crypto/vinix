@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Response;
 
+use App\Models\Pet;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,13 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'App\Http\Controllers\PetsController@home')->name('/');
-Route::get('pet/create', 'App\Http\Controllers\PetsController@create')->name('/pet/create');
-Route::post('pet/store', 'App\Http\Controllers\PetsController@store')->name('/pet/store');
-Route::get('pet/{id}','App\Http\Controllers\PetsController@show');
-
-/*Route::get('pets', function () {
-    return App\Models\Pet::all();
-});
-*/
+Route::get('pets/status/{status}', 'App\Http\Controllers\FunctionsController@show')->name('pets.status.show');
+Route::get('pets/category/{category}', 'App\Http\Controllers\CategoriesController@show')->name('categories.show');
+Route::resource('api', 'App\Http\Controllers\ApiController');
+Route::resource('pets', 'App\Http\Controllers\PetsController');

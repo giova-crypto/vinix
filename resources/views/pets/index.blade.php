@@ -10,11 +10,11 @@
         <img src="{{ $pet->urlPhoto }}" class="card-img-top" alt="{{ $pet->name}}-{{ $pet->category_id}}">
         <div class="card-body">
             <h3 class="card-title">{{ $pet->name }}</h3>
-            <h5 class="card-text text-warning">Category:  {{ $pet->category->name }}</h5>
-            <h5 class="card-text text-warning">Status:  {{ $pet->status }}</h5>
+            <h5 class="card-text text-secondary">Category:  {{ $pet->category->name }}</h5>
+            <h5 class="card-text text-secondary">Status:  {{ $pet->status }}</h5>
             <div class="tags container-flex">
                 @foreach ($pet->tags as $tag)
-                    <span style="color: grey">#{{ $tag->name }}</span>
+                    <span class="text-warning">#{{ $tag->name }}</span>
                 @endforeach
             </div>
         </div>

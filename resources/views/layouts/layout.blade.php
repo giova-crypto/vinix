@@ -24,19 +24,10 @@
             <hr>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{{ route('/') }}">Home</a>
+                    <a class="nav-link text-white" aria-current="page" href="{{ route('pets.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('/pet/create') }}">Create Pet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Search Pet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Update Pet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Delete Pet</a>
+                    <a class="nav-link text-white" href="{{ route('pets.create') }}">Create Pet</a>
                 </li>
             </ul>
         </div>
